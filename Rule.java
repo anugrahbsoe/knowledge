@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Map;
+
 class Rule
 {
 	protected Condition condition;
@@ -24,5 +27,10 @@ class Rule
 	public void apply(Map<String,String> facts)
 	{
 		facts.putAll(facts);
+	}
+
+	public List<String> getRequiredFacts()
+	{
+		return condition.getRequiredFacts();
 	}
 }

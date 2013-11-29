@@ -1,20 +1,20 @@
-import java.util.Map;
+import java.util.List;
 
 class Question
 {
 	public String factName;
-	
-	public Question question;
 
-	public List<Option> answers;
+	public String question;
 
-	public Question(String factName, String question, List<Option> answers)
+	public List<Option> options;
+
+	public Question(String factName, String question, List<Option> options)
 	{
 		this.factName = factName;
 
 		this.question = question;
 
-		this.answers = answers;
+		this.options = options;
 	}
 
 	public boolean canInfer(String fact)

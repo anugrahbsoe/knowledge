@@ -1,3 +1,8 @@
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 abstract class Solver
@@ -77,19 +82,21 @@ abstract class Solver
 			if (!rule.canInfer(goal))
 				continue;
 
-			List<String> conditionFacts = rule.getConditionFacts();
+			List<String> conditionFacts = rule.getRequiredFacts();
 
 			for (String fact : conditionFacts)
 				if (!facts.containsKey(fact))
 					relevantConditionFacts.add(fact);
 		}
 
-		goalStack.pushAll(relevantConditionFacts);
+		for (String fact : relevantConditionFacts)
+			if (!goalStack.contains(fact))
+				goalStack.push(fact);
 	}
 
 	private boolean skipRule(Rule rule, Map<String, String> facts)
 	{
-		for (String fact : facts.keys())
+		for (String fact : facts.keySet())
 			if (rule.canInfer(fact))
 				return true;
 		
